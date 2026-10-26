@@ -1,0 +1,6 @@
+{
+  "name": "Men's Fashion Picks India — Blogger Theme Studio",
+  "description": "Production-ready Blogger XML theme, Pinterest exact product-match storefront preview, post template generator, and affiliate management studio for stylepickindia.blogspot.com.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

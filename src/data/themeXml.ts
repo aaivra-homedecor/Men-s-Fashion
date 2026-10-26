@@ -1,0 +1,1292 @@
+/**
+ * Production-Grade Google Blogger XML Theme Generator
+ * Target: https://stylepickindia.blogspot.com/
+ * Brand: Men's Fashion Picks India
+ * Specification: Blogger XML layoutsVersion='3', defaultwidgetversion='2', responsive='true'
+ */
+
+export interface ThemeXmlConfig {
+  gaMeasurementId?: string; // e.g. 'G-XXXXXXXXXX'
+  brandName?: string;
+  tagline?: string;
+  affiliateDisclosureText?: string;
+}
+
+export function generateBloggerThemeXml(config: ThemeXmlConfig = {}): string {
+  const brand = config.brandName || "MEN'S FASHION PICKS INDIA";
+  const tagline = config.tagline || 'Discover Your Style. Shop Smarter.';
+  const gaId = config.gaMeasurementId?.trim() || '';
+
+  return `<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta charset='utf-8'/>
+  <meta content='width=device-width, initial-scale=1, shrink-to-fit=no' name='viewport'/>
+  <title><data:view.title.escaped/></title>
+  
+  <b:include data='blog' name='all-head-content'/>
+
+  <!-- Google Fonts: Inter -->
+  <link href='https://fonts.googleapis.com' rel='preconnect'/>
+  <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap' rel='stylesheet'/>
+
+  ${
+    gaId
+      ? `<!-- Google Analytics 4 (GA4) -->
+  <script async='async' src='https://www.googletagmanager.com/gtag/js?id=${gaId}'></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${gaId}', { 'anonymize_ip': true });
+  </script>`
+      : `<!-- Optional GA4 placeholder: Set your Measurement ID in Theme Settings -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){window.dataLayer.push(arguments);}
+  </script>`
+  }
+
+  <b:skin version='1.3.3'><![CDATA[
+    /*
+     * Men's Fashion Picks India — Minimal Editorial Storefront Theme
+     * Custom Palette:
+     * - Primary Charcoal: #17211F
+     * - Warm Cream: #F5F1E8
+     * - Muted Gold: #C6A66B
+     * - Pure White: #FFFFFF
+     * - Main Text: #222222
+     * - Secondary Text: #6B7280
+     * - Borders: #E5E7EB
+     */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #F5F1E8;
+      color: #222222;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.15s ease, opacity 0.15s ease;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Container */
+    .mfp-wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    /* Announcement Bar */
+    .mfp-announcement-bar {
+      background-color: #17211F;
+      color: #F5F1E8;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      text-align: center;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(198, 166, 107, 0.25);
+    }
+    .mfp-announcement-bar span {
+      color: #C6A66B;
+      margin-right: 6px;
+    }
+
+    /* Header */
+    .mfp-site-header {
+      background-color: #FFFFFF;
+      border-bottom: 1px solid #E5E7EB;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .mfp-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .mfp-brand-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .mfp-logo-link {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #17211F;
+      text-transform: uppercase;
+    }
+    .mfp-tagline {
+      font-size: 11px;
+      color: #6B7280;
+      letter-spacing: 0.04em;
+    }
+
+    /* Navigation */
+    .mfp-nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .mfp-nav-link {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #17211F;
+      padding: 6px 0;
+      position: relative;
+    }
+    .mfp-nav-link:hover, .mfp-nav-link.active {
+      color: #C6A66B;
+    }
+
+    /* Search Bar */
+    .mfp-header-search {
+      position: relative;
+    }
+    .mfp-search-form {
+      display: flex;
+      align-items: center;
+      background: #F5F1E8;
+      border: 1px solid #E5E7EB;
+      border-radius: 4px;
+      padding: 4px 10px;
+    }
+    .mfp-search-input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 13px;
+      color: #17211F;
+      width: 140px;
+      transition: width 0.2s ease;
+    }
+    .mfp-search-input:focus {
+      width: 190px;
+    }
+    .mfp-search-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #6B7280;
+      display: flex;
+      align-items: center;
+      padding: 2px;
+    }
+
+    /* Mobile Hamburger Menu */
+    .mfp-mobile-nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    /* Category Strip */
+    .mfp-category-strip {
+      background-color: #FFFFFF;
+      border-bottom: 1px solid #E5E7EB;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .mfp-category-strip::-webkit-scrollbar {
+      display: none;
+    }
+    .mfp-category-strip-inner {
+      display: flex;
+      gap: 16px;
+      padding: 10px 20px;
+    }
+    .mfp-cat-chip {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 5px 14px;
+      border-radius: 30px;
+      background-color: #F5F1E8;
+      color: #17211F;
+      border: 1px solid #E5E7EB;
+      transition: all 0.15s ease;
+    }
+    .mfp-cat-chip:hover, .mfp-cat-chip.active {
+      background-color: #17211F;
+      color: #FFFFFF;
+      border-color: #17211F;
+    }
+
+    /* Hero Section */
+    .mfp-hero {
+      background-color: #17211F;
+      color: #FFFFFF;
+      padding: 60px 0;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .mfp-hero-inner {
+      max-width: 800px;
+      text-align: center;
+      margin: 0 auto;
+    }
+    .mfp-hero-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #C6A66B;
+      margin-bottom: 12px;
+    }
+    .mfp-hero-title {
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      color: #FFFFFF;
+    }
+    .mfp-hero-sub {
+      font-size: 16px;
+      color: #D1D5DB;
+      max-width: 600px;
+      margin: 0 auto 28px;
+      line-height: 1.5;
+    }
+    .mfp-hero-cta {
+      display: inline-block;
+      background-color: #C6A66B;
+      color: #17211F;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 13px 32px;
+      border-radius: 3px;
+      transition: background-color 0.15s ease, transform 0.15s ease;
+    }
+    .mfp-hero-cta:hover {
+      background-color: #D6BA85;
+      transform: translateY(-1px);
+    }
+
+    /* Section Headers */
+    .mfp-section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #E5E7EB;
+      padding-bottom: 12px;
+    }
+    .mfp-section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #17211F;
+      letter-spacing: -0.01em;
+    }
+    .mfp-section-subtitle {
+      font-size: 13px;
+      color: #6B7280;
+      margin-top: 2px;
+    }
+
+    /* Shop by Category Grid */
+    .mfp-category-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .mfp-category-card {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      text-align: center;
+      padding: 16px 12px;
+    }
+    .mfp-category-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px -5px rgba(23, 33, 31, 0.08);
+      border-color: #C6A66B;
+    }
+    .mfp-category-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: #F5F1E8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      color: #C6A66B;
+      font-weight: 700;
+    }
+    .mfp-category-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #17211F;
+      margin-bottom: 4px;
+    }
+    .mfp-category-desc {
+      font-size: 11px;
+      color: #6B7280;
+      line-height: 1.3;
+    }
+
+    /* Product Grid */
+    .mfp-product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .mfp-product-card {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+    .mfp-product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -6px rgba(23, 33, 31, 0.1);
+      border-color: #D1D5DB;
+    }
+    .mfp-card-media {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background: #E5E7EB;
+      overflow: hidden;
+    }
+    .mfp-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .mfp-product-card:hover .mfp-card-media img {
+      transform: scale(1.04);
+    }
+    .mfp-card-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(23, 33, 31, 0.88);
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      backdrop-filter: blur(4px);
+    }
+    .mfp-card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .mfp-card-category {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #C6A66B;
+      margin-bottom: 4px;
+    }
+    .mfp-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: #17211F;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 38px;
+    }
+    .mfp-card-footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid #F5F1E8;
+    }
+    .mfp-card-price-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .mfp-card-price {
+      font-size: 15px;
+      font-weight: 700;
+      color: #17211F;
+    }
+    .mfp-card-retailer {
+      font-size: 10px;
+      color: #6B7280;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .mfp-card-cta-btn {
+      background-color: #17211F;
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 8px 14px;
+      border-radius: 3px;
+      transition: background-color 0.15s ease;
+      white-space: nowrap;
+    }
+    .mfp-card-cta-btn:hover {
+      background-color: #C6A66B;
+      color: #17211F;
+    }
+
+    /* ===================================================
+       PRODUCT DETAIL PAGE (EXACT PINTEREST MATCH)
+       =================================================== */
+    .mfp-product-detail-view {
+      padding: 32px 0 64px;
+    }
+    .mfp-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #6B7280;
+      margin-bottom: 24px;
+    }
+    .mfp-breadcrumb a:hover {
+      color: #17211F;
+      text-decoration: underline;
+    }
+    .mfp-breadcrumb-sep {
+      color: #C6A66B;
+    }
+    .mfp-breadcrumb-curr {
+      color: #17211F;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 320px;
+    }
+
+    .mfp-detail-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      padding: 36px;
+      margin-bottom: 56px;
+    }
+
+    .mfp-detail-gallery {
+      position: relative;
+    }
+    .mfp-detail-image-wrap {
+      aspect-ratio: 4 / 5;
+      background-color: #F5F1E8;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #E5E7EB;
+    }
+    .mfp-detail-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .mfp-detail-content {
+      display: flex;
+      flex-direction: column;
+    }
+    .mfp-detail-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .mfp-detail-cat-badge {
+      background-color: #F5F1E8;
+      color: #17211F;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+    .mfp-detail-retailer-badge {
+      background-color: #17211F;
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    .mfp-detail-title {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #17211F;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .mfp-detail-desc {
+      font-size: 15px;
+      color: #4B5563;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .mfp-detail-price-box {
+      background-color: #F5F1E8;
+      border: 1px solid #E5E7EB;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    .mfp-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .mfp-price-amount {
+      font-size: 24px;
+      font-weight: 700;
+      color: #17211F;
+    }
+    .mfp-price-tag {
+      font-size: 12px;
+      color: #6B7280;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .mfp-price-disclaimer {
+      font-size: 11px;
+      color: #6B7280;
+      line-height: 1.4;
+    }
+
+    /* Outbound Affiliate CTA */
+    .mfp-primary-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background-color: #17211F;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 16px 24px;
+      border-radius: 4px;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+      cursor: pointer;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .mfp-primary-cta:hover {
+      background-color: #C6A66B;
+      color: #17211F;
+      transform: translateY(-2px);
+    }
+    .mfp-primary-cta svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Transparent Affiliate Disclosure Box */
+    .mfp-affiliate-disclosure-box {
+      font-size: 11px;
+      color: #6B7280;
+      line-height: 1.5;
+      background: #FAFAF9;
+      border: 1px dashed #D1D5DB;
+      border-radius: 4px;
+      padding: 12px 14px;
+      margin-bottom: 24px;
+    }
+    .mfp-affiliate-disclosure-box strong {
+      color: #17211F;
+    }
+
+    /* Secondary Nav */
+    .mfp-secondary-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid #E5E7EB;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .mfp-secondary-nav a {
+      color: #17211F;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .mfp-secondary-nav a:hover {
+      color: #C6A66B;
+    }
+
+    /* Related Products Section */
+    .mfp-related-section {
+      margin-top: 48px;
+    }
+    .mfp-related-header {
+      margin-bottom: 24px;
+      border-bottom: 1px solid #E5E7EB;
+      padding-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .mfp-related-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #17211F;
+    }
+    .mfp-related-sub {
+      font-size: 13px;
+      color: #6B7280;
+    }
+
+    /* Footer */
+    .mfp-footer {
+      background-color: #17211F;
+      color: #D1D5DB;
+      padding: 56px 0 28px;
+      margin-top: auto;
+      border-top: 2px solid #C6A66B;
+    }
+    .mfp-footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .mfp-footer-brand h4 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin-bottom: 10px;
+    }
+    .mfp-footer-brand p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #9CA3AF;
+      max-width: 360px;
+    }
+    .mfp-footer-col h5 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #C6A66B;
+      margin-bottom: 14px;
+    }
+    .mfp-footer-col ul {
+      list-style: none;
+    }
+    .mfp-footer-col li {
+      margin-bottom: 8px;
+    }
+    .mfp-footer-col a {
+      font-size: 13px;
+      color: #9CA3AF;
+    }
+    .mfp-footer-col a:hover {
+      color: #FFFFFF;
+      text-decoration: underline;
+    }
+
+    .mfp-footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #6B7280;
+      line-height: 1.6;
+    }
+    .mfp-footer-bottom a {
+      color: #C6A66B;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .mfp-category-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .mfp-product-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .mfp-detail-layout {
+        gap: 32px;
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mfp-header-inner {
+        height: 64px;
+      }
+      .mfp-nav {
+        display: none;
+      }
+      .mfp-mobile-nav-toggle {
+        display: block;
+      }
+      .mfp-hero {
+        padding: 40px 0;
+      }
+      .mfp-hero-title {
+        font-size: 28px;
+      }
+      .mfp-hero-sub {
+        font-size: 14px;
+      }
+      .mfp-category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .mfp-product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .mfp-detail-layout {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 24px;
+      }
+      .mfp-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mfp-product-grid {
+        grid-template-columns: 1fr;
+      }
+      .mfp-logo-link {
+        font-size: 16px;
+      }
+    }
+  ]]></b:skin>
+</head>
+
+<body>
+  <!-- Announcement Bar -->
+  <div class='mfp-announcement-bar'>
+    <span>&#9733; STYLE PICK INDIA:</span> Curated Men&#39;s Streetwear, Sneakers, &amp; Everyday Wardrobe Finds
+  </div>
+
+  <!-- Header -->
+  <header class='mfp-site-header'>
+    <div class='mfp-wrap'>
+      <div class='mfp-header-inner'>
+        <div class='mfp-brand-group'>
+          <a class='mfp-logo-link' expr:href='data:blog.homepageUrl'>
+            ${brand}
+          </a>
+          <span class='mfp-tagline'>${tagline}</span>
+        </div>
+
+        <nav class='mfp-nav' role='navigation'>
+          <a class='mfp-nav-link' expr:href='data:blog.homepageUrl'>Home</a>
+          <a class='mfp-nav-link' expr:href='data:blog.homepageUrl + &quot;search?max-results=24&quot;'>Shop All</a>
+          <a class='mfp-nav-link' expr:href='data:blog.homepageUrl + &quot;search/label/Streetwear&quot;'>Streetwear</a>
+          <a class='mfp-nav-link' expr:href='data:blog.homepageUrl + &quot;search/label/Shoes%20%26%20Sneakers&quot;'>Shoes &amp; Sneakers</a>
+          <a class='mfp-nav-link' expr:href='data:blog.homepageUrl + &quot;search/label/Budget%20Finds&quot;'>Budget Finds</a>
+        </nav>
+
+        <div class='mfp-header-search'>
+          <b:section id='search_top' maxwidgets='1' name='Search (Top)' showaddelement='false'>
+            <b:widget id='BlogSearch1' locked='true' title='Search' type='BlogSearch' visible='true'>
+              <b:includable id='main'>
+                <form class='mfp-search-form' expr:action='data:blog.searchUrl' method='get'>
+                  <input autocomplete='off' class='mfp-search-input' expr:value='data:view.isSearch ? data:view.search.query.escaped : &quot;&quot;' name='q' placeholder='Search styles...' type='search'/>
+                  <button aria-label='Search' class='mfp-search-btn' type='submit'>
+                    <svg fill='none' height='16' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24' width='16'><circle cx='11' cy='11' r='8'/><line x1='21' x2='16.65' y1='21' y2='16.65'/></svg>
+                  </button>
+                </form>
+              </b:includable>
+            </b:widget>
+          </b:section>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Horizontal Category Navigation Strip -->
+  <div class='mfp-category-strip'>
+    <div class='mfp-wrap'>
+      <div class='mfp-category-strip-inner'>
+        <a class='mfp-cat-chip' expr:href='data:blog.homepageUrl + &quot;search/label/Streetwear&quot;'>Streetwear</a>
+        <a class='mfp-cat-chip' expr:href='data:blog.homepageUrl + &quot;search/label/Shoes%20%26%20Sneakers&quot;'>Shoes &amp; Sneakers</a>
+        <a class='mfp-cat-chip' expr:href='data:blog.homepageUrl + &quot;search/label/T-Shirts%20%26%20Shirts&quot;'>T-Shirts &amp; Shirts</a>
+        <a class='mfp-cat-chip' expr:href='data:blog.homepageUrl + &quot;search/label/Watches%20%26%20Accessories&quot;'>Watches &amp; Accessories</a>
+        <a class='mfp-cat-chip' expr:href='data:blog.homepageUrl + &quot;search/label/College%20Fits&quot;'>College Fits</a>
+        <a class='mfp-cat-chip' expr:href='data:blog.homepageUrl + &quot;search/label/Budget%20Finds&quot;'>Budget Finds</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Editorial Hero Section (Homepage Only) -->
+  <b:if cond='data:view.isHomepage'>
+    <section class='mfp-hero'>
+      <div class='mfp-wrap'>
+        <div class='mfp-hero-inner'>
+          <div class='mfp-hero-eyebrow'>Curated Menswear Edit &bull; India</div>
+          <h1 class='mfp-hero-title'>Upgrade Your Everyday Style.</h1>
+          <p class='mfp-hero-sub'>Discover trending streetwear, affordable sneakers, everyday essentials, and men&#39;s accessories curated for modern Indian lifestyles.</p>
+          <a class='mfp-hero-cta' expr:href='data:blog.homepageUrl + &quot;search?max-results=24&quot;'>Explore Collections</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shop By Category Cards -->
+    <div class='mfp-wrap'>
+      <div class='mfp-section-header'>
+        <div>
+          <h2 class='mfp-section-title'>Shop by Category</h2>
+          <p class='mfp-section-subtitle'>Find curated pieces by specific aesthetic and style need</p>
+        </div>
+      </div>
+      <div class='mfp-category-grid'>
+        <a class='mfp-category-card' expr:href='data:blog.homepageUrl + &quot;search/label/Streetwear&quot;'>
+          <div class='mfp-category-icon-wrap'>01</div>
+          <div class='mfp-category-name'>Streetwear</div>
+          <div class='mfp-category-desc'>Oversized tees &amp; cargos</div>
+        </a>
+        <a class='mfp-category-card' expr:href='data:blog.homepageUrl + &quot;search/label/Shoes%20%26%20Sneakers&quot;'>
+          <div class='mfp-category-icon-wrap'>02</div>
+          <div class='mfp-category-name'>Shoes &amp; Sneakers</div>
+          <div class='mfp-category-desc'>Retro kicks &amp; runners</div>
+        </a>
+        <a class='mfp-category-card' expr:href='data:blog.homepageUrl + &quot;search/label/T-Shirts%20%26%20Shirts&quot;'>
+          <div class='mfp-category-icon-wrap'>03</div>
+          <div class='mfp-category-name'>T-Shirts &amp; Shirts</div>
+          <div class='mfp-category-desc'>Heavyweight basics &amp; polos</div>
+        </a>
+        <a class='mfp-category-card' expr:href='data:blog.homepageUrl + &quot;search/label/Watches%20%26%20Accessories&quot;'>
+          <div class='mfp-category-icon-wrap'>04</div>
+          <div class='mfp-category-name'>Watches &amp; Accs</div>
+          <div class='mfp-category-desc'>Timepieces &amp; sunglasses</div>
+        </a>
+        <a class='mfp-category-card' expr:href='data:blog.homepageUrl + &quot;search/label/College%20Fits&quot;'>
+          <div class='mfp-category-icon-wrap'>05</div>
+          <div class='mfp-category-name'>College Fits</div>
+          <div class='mfp-category-desc'>Campus daily essentials</div>
+        </a>
+        <a class='mfp-category-card' expr:href='data:blog.homepageUrl + &quot;search/label/Budget%20Finds&quot;'>
+          <div class='mfp-category-icon-wrap'>06</div>
+          <div class='mfp-category-name'>Budget Finds</div>
+          <div class='mfp-category-desc'>Value picks under &#8377;999</div>
+        </a>
+      </div>
+    </div>
+  </b:if>
+
+  <!-- Main Content Area / Blog Widget -->
+  <main class='mfp-wrap' id='main-content' role='main'>
+    <b:section id='main' name='Main Content' showaddelement='false'>
+      <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' visible='true'>
+        <b:includable id='main'>
+          <!-- CASE 1: EXACT MATCH PRODUCT DETAIL PAGE (PINTEREST PIN LANDING) -->
+          <b:if cond='data:view.isPost'>
+            <b:loop values='data:posts' var='post'>
+              <article class='mfp-product-detail-view' expr:id='&quot;product-&quot; + data:post.id'>
+                <!-- Breadcrumbs -->
+                <nav aria-label='Breadcrumb' class='mfp-breadcrumb'>
+                  <a expr:href='data:blog.homepageUrl'>Home</a>
+                  <span class='mfp-breadcrumb-sep'>&gt;</span>
+                  <b:if cond='data:post.labels'>
+                    <a expr:href='data:post.labels.first.url'><data:post.labels.first.name/></a>
+                    <span class='mfp-breadcrumb-sep'>&gt;</span>
+                  </b:if>
+                  <span class='mfp-breadcrumb-curr'><data:post.title/></span>
+                </nav>
+
+                <!-- Product Detail Two-Column Editorial Card -->
+                <div class='mfp-detail-layout'>
+                  <!-- Column 1: Main High-Res Image -->
+                  <div class='mfp-detail-gallery'>
+                    <div class='mfp-detail-image-wrap'>
+                      <b:if cond='data:post.featuredImage'>
+                        <img expr:alt='data:post.title' expr:src='data:post.featuredImage' loading='eager'/>
+                      <b:else/>
+                        <img alt='Product Image' src='https://placehold.co/600x750/17211F/FFFFFF?text=Product+Photo'/>
+                      </b:if>
+                    </div>
+                  </div>
+
+                  <!-- Column 2: Exact Product Specifications & Outbound Affiliate CTA -->
+                  <div class='mfp-detail-content'>
+                    <div class='mfp-detail-badge-row'>
+                      <b:if cond='data:post.labels'>
+                        <span class='mfp-detail-cat-badge'><data:post.labels.first.name/></span>
+                      </b:if>
+                      <span class='mfp-detail-retailer-badge' id='mfp-retailer-badge'>Verified Retailer</span>
+                    </div>
+
+                    <h1 class='mfp-detail-title'><data:post.title/></h1>
+
+                    <!-- Render Post Body Content (Rich short description & microdata attributes) -->
+                    <div class='mfp-detail-desc entry-content' id='mfp-post-body'>
+                      <data:post.body/>
+                    </div>
+
+                    <!-- Manual Price & Availability Notice -->
+                    <div class='mfp-detail-price-box' id='mfp-price-container'>
+                      <div class='mfp-price-row'>
+                        <span class='mfp-price-amount' id='mfp-price-display'>Check Store</span>
+                        <span class='mfp-price-tag'>&bull; Best Online Price</span>
+                      </div>
+                      <p class='mfp-price-disclaimer'>Retailer pricing and stock availability fluctuate dynamically. Please verify current price, delivery options, and return terms directly on the store website.</p>
+                    </div>
+
+                    <!-- Primary Outbound Affiliate CTA Button -->
+                    <a class='mfp-primary-cta' expr:data-title='data:post.title' href='#' id='mfp-visit-store-btn' rel='sponsored nofollow noopener noreferrer' target='_blank'>
+                      <span>Visit Store &amp; Check Price</span>
+                      <svg fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' viewBox='0 0 24 24'><line x1='7' x2='17' y1='17' y2='7'/><polyline points='7 7 17 7 17 17'/></svg>
+                    </a>
+
+                    <!-- Transparent FTC / ASCI Affiliate Disclosure -->
+                    <div class='mfp-affiliate-disclosure-box'>
+                      <strong>Affiliate Disclosure:</strong> When you purchase through our links, we may earn an affiliate commission from our approved retail partners (e.g. Amazon India, Flipkart) at absolutely no additional cost to you. Thank you for supporting our independent curation!
+                    </div>
+
+                    <!-- Secondary Back Navigation -->
+                    <div class='mfp-secondary-nav'>
+                      <b:if cond='data:post.labels'>
+                        <a expr:href='data:post.labels.first.url'>
+                          Explore More in <data:post.labels.first.name/> &rarr;
+                        </a>
+                      </b:if>
+                      <a expr:href='data:blog.homepageUrl'>&larr; Back to All Collections</a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dynamic Related Products (Same category, excluding current post) -->
+                <div class='mfp-related-section' id='mfp-related-products-box'>
+                  <div class='mfp-related-header'>
+                    <div>
+                      <h3 class='mfp-related-title'>Related Fashion Picks</h3>
+                      <p class='mfp-related-sub'>Complementary pieces in the same aesthetic</p>
+                    </div>
+                  </div>
+                  <div class='mfp-product-grid' id='mfp-related-grid'>
+                    <!-- Populated dynamically via Blogger Feed API -->
+                  </div>
+                </div>
+
+                <!-- Client-Side Affiliate & Related Products Parser -->
+                <script type='text/javascript'>
+                  //<![CDATA[
+                  (function() {
+                    var postBody = document.getElementById('mfp-post-body');
+                    var ctaBtn = document.getElementById('mfp-visit-store-btn');
+                    var retailerBadge = document.getElementById('mfp-retailer-badge');
+                    var priceDisplay = document.getElementById('mfp-price-display');
+
+                    // Extract affiliate metadata from structured post data attributes
+                    if (postBody) {
+                      var card = postBody.querySelector('.affiliate-product-card, [data-affiliate-url]');
+                      if (card) {
+                        var affUrl = card.getAttribute('data-affiliate-url') || card.getAttribute('data-url');
+                        var store = card.getAttribute('data-affiliate-store') || card.getAttribute('data-store') || 'Amazon India';
+                        var price = card.getAttribute('data-price');
+
+                        if (affUrl && ctaBtn) {
+                          ctaBtn.setAttribute('href', affUrl);
+                          ctaBtn.setAttribute('data-store', store);
+                          ctaBtn.querySelector('span').textContent = 'Visit ' + store + ' \u2014 Check Availability';
+                        }
+                        if (store && retailerBadge) {
+                          retailerBadge.textContent = store;
+                        }
+                        if (price && priceDisplay) {
+                          priceDisplay.textContent = price;
+                        }
+                      } else {
+                        // Fallback: look for first outbound link inside body
+                        var firstLink = postBody.querySelector('a[href^="http"]');
+                        if (firstLink && ctaBtn) {
+                          ctaBtn.setAttribute('href', firstLink.getAttribute('href'));
+                        }
+                      }
+                    }
+
+                    // Attach GA4 affiliate_click event
+                    if (ctaBtn) {
+                      ctaBtn.addEventListener('click', function(e) {
+                        var destUrl = this.getAttribute('href');
+                        var title = this.getAttribute('data-title') || document.title;
+                        var store = this.getAttribute('data-store') || 'External Retailer';
+
+                        if (typeof gtag === 'function') {
+                          gtag('event', 'affiliate_click', {
+                            'event_category': 'Affiliate',
+                            'event_label': title,
+                            'affiliate_store': store,
+                            'outbound_url': destUrl
+                          });
+                        }
+                      });
+                    }
+
+                    // Dynamic Related Products Fetcher using Blogger JSON Feed
+                    var currentPostId = '<data:post.id/>';
+                    var categoryLabel = '<b:if cond="data:post.labels"><data:post.labels.first.name/></b:if>';
+                    var relatedGrid = document.getElementById('mfp-related-grid');
+
+                    if (categoryLabel && relatedGrid) {
+                      var feedUrl = '/feeds/posts/default/-/' + encodeURIComponent(categoryLabel) + '?alt=json&max-results=5';
+                      fetch(feedUrl)
+                        .then(function(res) { return res.json(); })
+                        .then(function(data) {
+                          var entries = (data && data.feed && data.feed.entry) ? data.feed.entry : [];
+                          var html = '';
+                          var count = 0;
+
+                          for (var i = 0; i < entries.length; i++) {
+                            var entry = entries[i];
+                            var entryId = entry.id.$t;
+                            // Exclude current post
+                            if (entryId.indexOf(currentPostId) !== -1) continue;
+
+                            var entryTitle = entry.title.$t;
+                            var postUrl = '';
+                            for (var j = 0; j < entry.link.length; j++) {
+                              if (entry.link[j].rel === 'alternate') {
+                                postUrl = entry.link[j].href;
+                                break;
+                              }
+                            }
+                            var thumbUrl = 'https://placehold.co/400x500/17211F/FFFFFF?text=Men%27s+Fashion';
+                            if (entry.media$thumbnail) {
+                              thumbUrl = entry.media$thumbnail.url.replace('/s72-c/', '/w500-h600-c/');
+                            }
+
+                            html += '<article class="mfp-product-card">' +
+                              '<div class="mfp-card-media">' +
+                                '<a href="' + postUrl + '"><img src="' + thumbUrl + '" alt="' + entryTitle + '" loading="lazy"/></a>' +
+                                '<span class="mfp-card-badge">' + categoryLabel + '</span>' +
+                              '</div>' +
+                              '<div class="mfp-card-body">' +
+                                '<h4 class="mfp-card-title"><a href="' + postUrl + '">' + entryTitle + '</a></h4>' +
+                                '<div class="mfp-card-footer">' +
+                                  '<span class="mfp-card-retailer">Curated Pick</span>' +
+                                  '<a class="mfp-card-cta-btn" href="' + postUrl + '">View Pick &rarr;</a>' +
+                                '</div>' +
+                              '</div>' +
+                            '</article>';
+
+                            count++;
+                            if (count >= 4) break;
+                          }
+
+                          if (count > 0) {
+                            relatedGrid.innerHTML = html;
+                          } else {
+                            document.getElementById('mfp-related-products-box').style.display = 'none';
+                          }
+                        })
+                        .catch(function(err) {
+                          console.log('Related products feed unavailable:', err);
+                        });
+                    }
+                  })();
+                  //]]>
+                </script>
+              </article>
+            </b:loop>
+
+          <!-- CASE 2: HOMEPAGE, CATEGORY ARCHIVE, OR SEARCH LISTING -->
+          <b:else/>
+            <div class='mfp-feed-section'>
+              <b:if cond='data:view.isLabelSearch'>
+                <div class='mfp-section-header'>
+                  <div>
+                    <h2 class='mfp-section-title'><data:view.search.label/> Collection</h2>
+                    <p class='mfp-section-subtitle'>Browse our curated picks for <data:view.search.label/></p>
+                  </div>
+                  <a class='mfp-nav-link' expr:href='data:blog.homepageUrl'>&larr; View All</a>
+                </div>
+              <b:elseif cond='data:view.isSearch'/>
+                <div class='mfp-section-header'>
+                  <div>
+                    <h2 class='mfp-section-title'>Search Results: &ldquo;<data:view.search.query/>&rdquo;</h2>
+                    <p class='mfp-section-subtitle'>Curated matches for your search</p>
+                  </div>
+                  <a class='mfp-nav-link' expr:href='data:blog.homepageUrl'>&larr; View All</a>
+                </div>
+              <b:else/>
+                <div class='mfp-section-header'>
+                  <div>
+                    <h2 class='mfp-section-title'>Trending Fashion Finds</h2>
+                    <p class='mfp-section-subtitle'>Active recommendations vetted for fabric, cut, and value</p>
+                  </div>
+                  <a class='mfp-nav-link' expr:href='data:blog.homepageUrl + &quot;search/label/Budget%20Finds&quot;'>View Budget Finds &rarr;</a>
+                </div>
+              </b:if>
+
+              <!-- Responsive Product Grid -->
+              <div class='mfp-product-grid'>
+                <b:loop values='data:posts' var='post'>
+                  <article class='mfp-product-card' expr:id='&quot;card-&quot; + data:post.id'>
+                    <div class='mfp-card-media'>
+                      <a expr:href='data:post.url'>
+                        <b:if cond='data:post.featuredImage'>
+                          <img expr:alt='data:post.title' expr:src='data:post.featuredImage' loading='lazy'/>
+                        <b:else/>
+                          <img alt='Product Photo' src='https://placehold.co/400x500/17211F/FFFFFF?text=Product+Photo'/>
+                        </b:if>
+                      </a>
+                      <b:if cond='data:post.labels'>
+                        <span class='mfp-card-badge'><data:post.labels.first.name/></span>
+                      </b:if>
+                    </div>
+
+                    <div class='mfp-card-body'>
+                      <b:if cond='data:post.labels'>
+                        <div class='mfp-card-category'><data:post.labels.first.name/></div>
+                      </b:if>
+                      <h3 class='mfp-card-title'>
+                        <a expr:href='data:post.url'><data:post.title/></a>
+                      </h3>
+                      
+                      <div class='mfp-card-footer'>
+                        <div class='mfp-card-price-group'>
+                          <span class='mfp-card-price'>Curated Pick</span>
+                          <span class='mfp-card-retailer'>Verified Quality</span>
+                        </div>
+                        <a class='mfp-card-cta-btn' expr:href='data:post.url'>
+                          View Pick &rarr;
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                </b:loop>
+              </div>
+
+              <!-- Pagination -->
+              <b:if cond='data:olderPageUrl or data:newerPageUrl'>
+                <div style='display:flex; justify-content:center; gap:16px; margin:32px 0;'>
+                  <b:if cond='data:newerPageUrl'>
+                    <a class='mfp-card-cta-btn' expr:href='data:newerPageUrl'>&larr; Newer Picks</a>
+                  </b:if>
+                  <b:if cond='data:olderPageUrl'>
+                    <a class='mfp-card-cta-btn' expr:href='data:olderPageUrl'>Older Picks &rarr;</a>
+                  </b:if>
+                </div>
+              </b:if>
+            </div>
+          </b:if>
+        </b:includable>
+      </b:widget>
+    </b:section>
+  </main>
+
+  <!-- Footer -->
+  <footer class='mfp-footer'>
+    <div class='mfp-wrap'>
+      <div class='mfp-footer-grid'>
+        <!-- Column 1: Brand Info -->
+        <div class='mfp-footer-brand'>
+          <h4>${brand}</h4>
+          <p>An independent style curation project dedicated to helping modern Indian men build versatile, confident wardrobes without overpaying. We highlight wearable streetwear, quality basics, and everyday footwear.</p>
+        </div>
+
+        <!-- Column 2: Categories -->
+        <div class='mfp-footer-col'>
+          <h5>Collections</h5>
+          <ul>
+            <li><a expr:href='data:blog.homepageUrl + &quot;search/label/Streetwear&quot;'>Streetwear</a></li>
+            <li><a expr:href='data:blog.homepageUrl + &quot;search/label/Shoes%20%26%20Sneakers&quot;'>Shoes &amp; Sneakers</a></li>
+            <li><a expr:href='data:blog.homepageUrl + &quot;search/label/T-Shirts%20%26%20Shirts&quot;'>T-Shirts &amp; Shirts</a></li>
+            <li><a expr:href='data:blog.homepageUrl + &quot;search/label/Watches%20%26%20Accessories&quot;'>Watches &amp; Accessories</a></li>
+            <li><a expr:href='data:blog.homepageUrl + &quot;search/label/College%20Fits&quot;'>College Fits</a></li>
+            <li><a expr:href='data:blog.homepageUrl + &quot;search/label/Budget%20Finds&quot;'>Budget Finds</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Legal & Information -->
+        <div class='mfp-footer-col'>
+          <h5>Information &amp; Legal</h5>
+          <ul>
+            <li><a expr:href='data:blog.homepageUrl + &quot;p/about-us.html&quot;'>About Us</a></li>
+            <li><a expr:href='data:blog.homepageUrl + &quot;p/contact-us.html&quot;'>Contact Us</a></li>
+            <li><a expr:href='data:blog.homepageUrl + &quot;p/privacy-policy.html&quot;'>Privacy Policy</a></li>
+            <li><a expr:href='data:blog.homepageUrl + &quot;p/affiliate-disclosure.html&quot;'>Affiliate Disclosure</a></li>
+            <li><a expr:href='data:blog.homepageUrl + &quot;p/disclaimer.html&quot;'>Disclaimer</a></li>
+            <li><a expr:href='data:blog.homepageUrl + &quot;p/terms-and-conditions.html&quot;'>Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class='mfp-footer-bottom'>
+        <p>&copy; 2026 ${brand}. All rights reserved. Hosted on Google Blogger.</p>
+        <p style='margin-top:6px; font-size:11px;'>Affiliate Disclosure: This site contains affiliate links to verified partner platforms including Amazon.in and Flipkart.com. We may earn a commission from qualifying purchases at no extra cost to you.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>`;
+}
